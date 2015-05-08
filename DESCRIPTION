@@ -4,8 +4,9 @@ Title: Modified Wilcoxon rank test and Kruskal Wallis test for zero-inflated
     data.
 Version: 1.0.0
 Date: 2015-05-06
-Author: Wanjie Wang <wanjie.w@gmail.com>; Eric Z Chen <chvlyl@gmail.com>
-Maintainer: Wanjie Wang <wanjie.w@gmail.com>; Eric Z Chen <chvlyl@gmail.com>
+Authors@R: c(
+    person("Eric", "Chen", email = "chvlyl@gmail.com", role = c("aut", "cre")),
+    person("Wanjie", "Wang", email = "wanjie.w@gmail.com", role = c("aut", "cre")))
 Description: Modified Wilcoxon rank test and Kruskal Wallis test for
     zero-inflated data.
 License: MIT

@@ -1,15 +1,11 @@
 Package: ZIR
 Type: Package
-Title: What the package does (short line)
-Title: Modified Wilcoxon rank test and Kruskal Wallis test for zero-inflated data.
-Version: 1.0
+Title: Modified Wilcoxon rank test and Kruskal Wallis test for zero-inflated
+    data.
+Version: 0.0.1
 Date: 2015-05-06
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
 Author: Wanjie Wang <wanjie.w@gmail.com>; Eric Z Chen <chvlyl@gmail.com>
 Maintainer: Wanjie Wang <wanjie.w@gmail.com>; Eric Z Chen <chvlyl@gmail.com>
-Description: When the underlying distribution of data is unknown, usually we use nonparametric test to test the differece between groups. For example, Wilcoxon rank sum test (Mann-Whitney U test) is often used for two group comparison, and Kruskal Wallis test is used for multiple group comparison. However, sometimes the data may contain many zeroes and the tranditional rank based test, such as Wilcoxon rank sum test and Kruskal Wallis test have low power due to the ties in the data. 
-Here we developed a R package called ZIR (Zero-Inflated Rank Test), which has more power than the tranditional rank based test when the data contain many zeroes, and have similar power as the tranditional rank based test when the data don't have too many zeros.
+Description: Modified Wilcoxon rank test and Kruskal Wallis test for
+    zero-inflated data.
 License: What license is it under?
-

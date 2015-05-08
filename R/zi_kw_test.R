@@ -1,20 +1,16 @@
 #' Modified Kruskal Wallis test for zero-inflated data
 #'
-#' @param X the covariates for zero proportion
-#' @param Z the covariates for non-zero compoment
-#' @param alpha the regression coeffcient
-#' @param beta the regression coeffcient
-#' @param sim.seed the seed for the random number generator
-#' @return test.table, eta, b, phi
+#' @param x  a numeric vector of data values, or a list of numeric data vectors.
+#' @param g a vector or factor object giving the group for the corresponding elements of x. Ignored if x is a list.
+#' @param alpha the significant level
+#' @param perm use permutation
+#' @return pvalue
 #' @export
 #' @examples
-#' likelihood_ratio_test_mada(Data,Covariates,total.counts,marker.length)
+#' zi_kw_test(x, g, alpha = 0.05, perm = FALSE)
 
 
-#x: a numeric vector of data values, or a list of numeric data vectors.
-#g: a vector or factor object giving the group for the corresponding elements of x. Ignored if x is a list.
-
-ANOVA.zeros <- function(x, g, alpha = 0.05, perm = FALSE){
+zi_kw_test <- function(x, g, alpha = 0.05, perm = FALSE){
 	if(class(x) == "numeric" || class(x) == "data.frame"){
 		s = levels(g); newx = as.vector(NULL, mode = "list")
 		for(i in 1:s){

@@ -1,17 +1,17 @@
 #' Modified Wilcoxon rank test for zero-inflated data
 #'
-#' @param X the covariates for zero proportion
-#' @param Z the covariates for non-zero compoment
-#' @param alpha the regression coeffcient
-#' @param beta the regression coeffcient
-#' @return test.table, eta, b, phi
+#' @param x the covariates for zero proportion
+#' @param y the covariates for non-zero compoment
+#' @param alpha the significant level
+#' @param perm use permutation
+#' @return pvalue
 #' @export
 #' @examples
-#' likelihood_ratio_test_mada(Data,Covariates,total.counts,marker.length)
+#' zi_wilcox_test(x, y, alpha = 0.05, perm = FALSE)
 
 
 
-Wilcoxon.zeros <- function(x, y, alpha = 0.05, perm = FALSE) {
+zi_wilcox_test <- function(x, y, alpha = 0.05, perm = FALSE) {
 	
 	N = c(length(x), length(y));
 

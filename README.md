@@ -14,3 +14,7 @@ library(ZIR)
 ```
 
 ## Basic Usage
+
+
+## Citation
+Wanjie Wang, Eric Z. Chen and Hongzhe Li (2015). Rank-based tests for compositional distributions with a clump of zeros. Submitted.

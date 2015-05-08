@@ -14,7 +14,7 @@ zi_kw_test <- function(x, g, alpha = 0.05, perm = FALSE){
 	if(class(x) == "numeric" || class(x) == "data.frame"){
 		s = levels(g); newx = as.vector(NULL, mode = "list")
 		for(i in 1:s){
-			newx = list(newx, x[g==leves(g)[i]])
+			newx = list(newx, x[g==levels(g)[i]])
 		}
 		names(newx) = names(g)
 	}

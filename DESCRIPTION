@@ -1,7 +1,7 @@
 Package: ZIR
 Type: Package
-Title: Modified Wilcoxon rank test and Kruskal Wallis test for zero-inflated
-    data.
+Title: Modified Wilcoxon Rank Test and Kruskal Wallis Test for Zero-Inflated
+    Data.
 Version: 1.0.0
 Date: 2015-05-06
 Authors@R: c(

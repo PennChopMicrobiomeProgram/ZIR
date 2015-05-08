@@ -2,10 +2,10 @@ Package: ZIR
 Type: Package
 Title: Modified Wilcoxon rank test and Kruskal Wallis test for zero-inflated
     data.
-Version: 0.0.1
+Version: 1.0.0
 Date: 2015-05-06
 Author: Wanjie Wang <wanjie.w@gmail.com>; Eric Z Chen <chvlyl@gmail.com>
 Maintainer: Wanjie Wang <wanjie.w@gmail.com>; Eric Z Chen <chvlyl@gmail.com>
 Description: Modified Wilcoxon rank test and Kruskal Wallis test for
     zero-inflated data.
-License: What license is it under?
+License: MIT

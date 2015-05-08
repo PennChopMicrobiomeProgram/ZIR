@@ -6,12 +6,9 @@ When the underlying distribution of data is unknown, usually we use nonparametri
 Here we developed a R package called ZIR (Zero-Inflated Rank Test), which has more power than the tranditional rank based test when the data contain many zeroes, and have similar power as the tranditional rank based test when the data don't have too many zeros.
 
 ## Install
-You install them from CRAN with install.packages("x")
-
 You can install our ZIR package from Github
 ```r
 install.packages("devtools")
 devtools::install_github("chvlyl/ZIR")
 ```
 
-## Use

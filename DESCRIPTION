@@ -8,6 +8,6 @@ Authors@R: c(
     person("Wanjie", "Wang", email = "wanjie.w@gmail.com", role = c("aut", "cre")),
     person("Eric", "Zhang Chen", email = "chvlyl@gmail.com", role = c("aut"))
     )
-Description: Modified Wilcoxon rank test and Kruskal Wallis test for
-    zero-inflated data.
+Description: Modified Wilcoxon rank test and Kruskal Wallis test for zero-inflated data.
 License: MIT
+URL: https://github.com/chvlyl/ZIR

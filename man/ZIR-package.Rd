@@ -22,13 +22,12 @@ License: \tab What license is it under?\cr
 ~~ important functions ~~
 }
 \author{
-Who wrote it
+Eric Chen and Wanjie Wang
 
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+Maintainer: Wanjie Wang <wanjie.w@gmail.com>
 }
 \references{
-~~ Literature or other references for background information ~~
+Wanjie Wang, Eric Chen and Hongzhe Li (2015) Rank-Based Tests for Compositional Data with a Clump of Zeros.
 }
 ~~ Optionally other standard keywords, one per line, from file ~~
 ~~ KEYWORDS in the R documentation directory ~~
@@ -38,5 +37,5 @@ Maintainer: Who to complain to <yourfault@somewhere.net>
 ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
+simple examples of the most important functions
 }

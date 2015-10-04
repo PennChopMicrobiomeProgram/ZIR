@@ -1,7 +1,7 @@
 Package: ZIR
 Type: Package
 Title: Modified Wilcoxon Rank Test and Kruskal Wallis Test for Zero-Inflated Data
-Version: 0.0.1
+Version: 1.0.0
 Date: 2015-05-06
 Authors@R: c( 
     person("Wanjie", "Wang", email = "wanjie.w@gmail.com", role = c("aut", "cre")), 

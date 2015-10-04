@@ -9,11 +9,12 @@
 #' x <- c(rep(0,5),rlnorm(20, meanlog = 0, sdlog = 1))
 #' y <- c(rep(0,10),rlnorm(20, meanlog = 2, sdlog = 1))
 #' ziw(x, y, perm = FALSE)
+#' ## use permutations to calculate the pvalue
 #' ziw(x, y, perm = TRUE)
 
 
-ziw <- function(x, y, perm = FALSE) {
-  calculate_ziw_statistic= function(x,y){
+ziw = function(x, y, perm = FALSE) {
+  calculate_ziw_statistic = function(x,y){
     ## total observations in each vector
     N <- c(length(x), length(y))
     ## number of non-zero observations in each vector
@@ -37,7 +38,7 @@ ziw <- function(x, y, perm = FALSE) {
       sum(N^2) * v1^2 * 5 / 4 + 2 * sqrt(2 / pi) * pmean * (sum(N) * v1) ^ (1.5) *
       sqrt(N[1] * N[2])
     var1 <- var1 / 4
-    var2 <- N[1] * N[2] * pmean ^ 2 * (sum(N) * pmean + 1) / 12
+    var2 <- N[1]*N[2]*pmean^2*(sum(N)*pmean+1)/12
     vars <- var1 + var2
     ## modified wilcoxon rank sum statistic
     w <- s / sqrt(vars)
@@ -49,13 +50,13 @@ ziw <- function(x, y, perm = FALSE) {
   
   ## calculate the pvalue
   if (perm) {
-    numrep = 10000 
-    permu.w = rep(0, numrep)
+    numrep <- 10000 
+    permu.w <- rep(0, numrep)
     N <- c(length(x), length(y))
     Z <- c(x, y)
     for (i in 1:numrep) {
       set.seed(i)
-      ind = sample(sum(N), N[1])
+      ind <- sample(sum(N), N[1])
       x <- Z[ind] 
       y <- Z[-ind]
       permu.w[i] <- calculate_ziw_statistic(x,y) 
@@ -63,7 +64,7 @@ ziw <- function(x, y, perm = FALSE) {
     p <- sum(abs(w) < abs(permu.w)) / numrep
   }
   else{
-    p = 2 * (1 - pnorm(abs(w)))
+    p <- 2 * (1 - pnorm(abs(w)))
   }
   
   return(list(p.value = p, statistics = w))

@@ -7,7 +7,16 @@ Authors@R: c(
     person("Wanjie", "Wang", email = "wanjie.w@gmail.com", role = c("aut", "cre")), 
     person("Eric", "Zhang Chen", email = "chvlyl@gmail.com",role = c("aut")) 
     )
-Description: When the underlying distribution of data is unknown, usually we use nonparametric test to test the difference between groups. For example, Wilcoxon rank sum test (Mann-Whitney U test) is often used for two group comparison, and Kruskal Wallis test is used for multiple group comparison. However, sometimes the data may contain many zeroes and the traditional rank based test, such as Wilcoxon rank sum test and Kruskal Wallis test have low power due to the ties in the data. Here we developed a R package called ZIR (Zero-Inflated Rank Test), which has more power than the traditional rank based test when the data contain many zeroes, and have similar power as the traditional rank based test when the data don't have too many zeros.
+Description: When the underlying distribution of data is unknown,usually we use 
+  nonparametric test to test the difference between groups. For example, 
+  Wilcoxon rank sum test (Mann-Whitney U test) is often used for two group 
+  comparison, and Kruskal Wallis test is used for multiple group comparison. 
+  However, sometimes the data may contain many zeroes and the traditional rank 
+  based test, such as Wilcoxon rank sum test and Kruskal Wallis test have low 
+  power due to the ties in the data. Here we developed a R package called ZIR 
+  (Zero-Inflated Rank Test), which has more power than the traditional rank 
+  based test when the data contain many zeroes, and have similar power as the 
+  traditional rank based test when the data don't have too many zeros.
 License: GPL-2
 LazyData: true
 References: Wanjie Wang, Eric Z. Chen and Hongzhe Li (2015). Rank-based tests for compositional distributions with a clump of zeros. Submitted.

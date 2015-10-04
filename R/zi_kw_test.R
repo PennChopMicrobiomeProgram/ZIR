@@ -1,119 +1,117 @@
-#' Modified Kruskal Wallis test for zero-inflated data
+#' Modified Kruskal Wallis test (ZIKW) for zero-inflated data
 #'
-#' @param x  a numeric vector of data values, or a list of numeric data vectors.
-#' @param g a vector or factor object giving the group for the corresponding elements of x. Ignored if x is a list.
-#' @param alpha the significant level
-#' @param perm use permutation
-#' @return pvalue
+#' @param x a numeric vector of data values with groups defined by the group parameter, or a list of numeric data vectors with each vector in the list as one group.
+#' @param group a vector giving the groups for the corresponding elements of x. Ignored if x is a list.
+#' @param perm use permutations to calculate the pvalue
+#' @return modified Kruskal Wallis test statistic and pvalue
 #' @export
 #' @examples
-#' zi_kw_test(x, g, alpha = 0.05, perm = FALSE)
+#' ## x is a list
+#' x <- list(group1 = c(rep(0,5),rlnorm(20, meanlog = 0, sdlog = 1)),
+#'      group2=c(rep(0,10),rlnorm(20, meanlog = 1, sdlog = 1)),
+#'      group3=c(rep(0,15),rlnorm(20, meanlog = 2, sdlog = 1)))
+#' zikw(x, perm = FALSE)
+#' ## x is a vector
+#' x <- c(c(rep(0,5),rlnorm(20, meanlog = 0, sdlog = 1)),
+#'     c(rep(0,10),rlnorm(20, meanlog = 1, sdlog = 1)),
+#'     c(rep(0,15),rlnorm(20, meanlog = 2, sdlog = 1)))
+#' group <- c(rep('group1',25),rep('group2',30),rep('group3',35))
+#' zikw(x, group, perm = FALSE)
+#' ## use permutations to calculate the pvalue
+#' zikw(x, perm = TRUE)
 
-
-zi_kw_test <- function(x, g, alpha = 0.05, perm = FALSE){
-	if(class(x) == "numeric" || class(x) == "data.frame"){
-		s = levels(g); newx = as.vector(NULL, mode = "list")
-		for(i in 1:s){
-			newx = list(newx, x[g==levels(g)[i]])
-		}
-		names(newx) = names(g)
-	}
-
-	K = length(x); N = n = rep(0, K); xvec = numeric(0);
-	for(i in 1:K){ 
-		N[i] = length(x[[i]]); n[i] = sum(x[[i]] !=0)
-		xvec = c(xvec, x[[i]]);
-		}
-	prop = n/N; pmax = max(prop);
-	Ntrun = round(pmax*N);
-	
-	Xtrun.vec = numeric(0);
-	for(i in 1:K){ 
-		data = x[[i]];
-		Xtrun.vec = c(Xtrun.vec, data[data != 0], rep(0, Ntrun[i] - n[i]));
-		}
-	rankdata = sum(Ntrun) + 1 - rank(Xtrun.vec); 
-	
-	r = sum(rankdata[1:Ntrun[i]]);
-	for(i in 2:K){ 
-		r = c(r, sum(rankdata[1:Ntrun[i] + sum(Ntrun[1:(i-1)])]))
-		}
-	s = r - Ntrun*(sum(Ntrun) + 1)/2; u = numeric(0);
-	for(i in 1:(K - 1))
-		u = c(u, N[i+1]*sum(s[1:i]) - sum(N[1:i])*s[i+1]);
-	u = u/sum(N)^2;
-
-	thetam = mean(prop);
-	simun = matrix(0, nrow = 5000, ncol = K); simup = simun;
-	for(ss in 1:K){
-		simun[,ss] = rbinom(5000, N[ss], thetam);		
-		simup[,ss] = simun[,ss]/N[ss];
-	}
-	simupmax = apply(simup, 1, max);
-	varsimu = numeric(K - 1);
-	varsimu[1] = N[2]^2*mean(simupmax^2*(simup[,1] - simup[,2])^2)*N[1]^2;
-	varu2 = N[2]*N[1]*(N[1] + N[2]);
-	for(ss in 2:(K-1)){
-		varsimu[ss] = N[ss+1]^2*mean(simupmax^2*(apply(simun[,1:ss], 1, sum) - simup[,ss+1]*sum(N[1:ss]))^2);
-		varu2 = c(varu2, N[ss+1]*sum(N[1:ss])*sum(N[1:(ss+1)]));
-	}
-	varsimu = varsimu/(sum(N))^2/4;
-
-	varu2 = varu2*thetam^2*(thetam + 1/sum(N))/12/(sum(N))^2;
-	varu = varsimu + varu2;
-
-	w = sum(u^2/varu);
-
-	if(perm){
-		numrep = 10000; permu.w = rep(0, numrep)
-		for(i in 1:numrep){
-			ind = sample(xvec, sum(N));
-			for(i in 1:K) n[i] = sum(xvec[sum(N[0:(i - 1)]) + 1:N[i]] !=0);
-			prop = n/N; pmax = max(prop);
-			Ntrun = round(pmax*N);
-	
-			Xtrun.vec = numeric(0);
-			for(i in 1:K){ 
-				data = xvec[sum(N[0:(i - 1)]) + 1:N[i]];
-				Xtrun.vec = c(Xtrun.vec, data[data != 0], rep(0, Ntrun[i] - n[i]));
-			}
-			rankdata = sum(Ntrun) + 1 - rank(Xtrun.vec); 
-	
-			r = sum(rankdata[1:Ntrun[i]]);
-			for(i in 1:length(x)){ 
-				r = c(r, sum(rankdata[1:Ntrun[i] + sum(Ntrun[1:(i-1)])]))
-			}
-			s = r - Ntrun*(sum(Ntrun) + 1)/2;
-			for(i in 1:(K - 1))
-				u = c(u, N[i+1]*sum(s[1:i]) - sum(N[1:i])*s[i+1]);
-			u = u/sum(N)^2;
-
-			thetam = mean(prop);
-			simun = matrix(0, nrow = 5000, ncol = K); simup = simun;
-			for(ss in 1:K){
-				simun[,ss] = rbinom(5000, N[ss], thetam);		
-				simup[,ss] = simun[,ss]/N[ss];
-			}
-			simupmax = apply(simup, 1, max);
-			varsimu = numeric(K - 1);
-			varsimu[1] = N[2]^2*mean(simupmax^2*(simup[,1] - simup[,2])^2)*N[1]^2;
-			for(ss in 2:(K-1)){
-				varsimu[ss] = N[ss+1]^2*mean(simupmax^2*(apply(simun[,1:ss], 1, sum) - simup[,ss+1]*sum(N[1:ss]))^2);
-			}
-			varsimu = varsimu/(sum(N))^2/4;
-
-			varu2 = c(N[1]*N[2], N[3]*sum(N))*(N[1] + N[2])*sum(N)*thetam^2*(sum(N)*thetam + 1)/12/(sum(N))^4;
-			varu = varsimu + varu2;
-
-			permu.w[i] = sum(u^2/varu);
-			}
-		pw = sum(abs(w) < abs(permu.w))/numrep;
-		}
-
-	else{
-		pw = pchisq(w, K-1, lower.tail = F);}
-
-	H = (pw < alpha);
-	result <- list(H = H, p.value = pw, statistics=w)
-	return(result)
+zikw <- function(x, group, perm = FALSE) {
+  ## transform x into a list
+  if (class(x) == "numeric" || class(x) == "data.frame") {
+    s <- unique(group)
+    newx <- list()
+    for (i in s) {
+      newx[[i]] <- x[group == i]
+    }
+    x <- newx
+  }
+  
+  calculate_zikw_statistic = function(x){
+  ## number of groups
+  K <- length(x)
+  ## total observations in each group
+  N <- rep(0, K)
+  ## number of non-zero observations in each group
+  n <- rep(0, K)
+  xvec <- numeric(0)
+  ## count total and non-zero observations in each group
+  for (i in 1:K) {
+    N[i] <- length(x[[i]])
+    n[i] <- sum(x[[i]] != 0)
+    xvec <- c(xvec, x[[i]])
+  }
+  ## non-zero proportion
+  prop <- n / N
+  pmax <- max(prop)
+  ## keep only round(pmax * N) observations in each group
+  Ntrun <- round(pmax * N)
+  ## truncate zeros in each group
+  Xtrun.vec <- numeric(0)
+  for (i in 1:K) {
+    data <- x[[i]]
+    Xtrun.vec <- c(Xtrun.vec, data[data != 0], rep(0, Ntrun[i] - n[i]))
+  }
+  rankdata <- sum(Ntrun) + 1 - rank(Xtrun.vec)
+  r <- sum(rankdata[1:Ntrun[i]])
+  
+  for (i in 2:K) {
+    r <- c(r, sum(rankdata[1:Ntrun[i] + sum(Ntrun[1:(i - 1)])]))
+  }
+  s <- r - Ntrun * (sum(Ntrun) + 1) / 2
+  u <- numeric(0)
+  
+  for (i in 1:(K - 1))
+    u <- c(u, N[i + 1] * sum(s[1:i]) - sum(N[1:i]) * s[i + 1])
+    u <- u / sum(N) ^ 2
+    thetam <- mean(prop)
+    simun <- matrix(0, nrow = 5000, ncol = K)
+    simup <- simun
+    for (ss in 1:K) {
+      simun[,ss] <- rbinom(5000, N[ss], thetam)
+      simup[,ss] <- simun[,ss] / N[ss]
+    }
+    simupmax <- apply(simup, 1, max)
+    varsimu <- numeric(K - 1)
+  
+    varsimu[1] <- N[2]^2*mean(simupmax^2*(simup[,1] - simup[,2])^2)*N[1]^2
+    varu2 <- N[2]*N[1]*(N[1] + N[2])
+  
+    for (ss in 2:(K - 1)) {
+      varsimu[ss] <-
+      N[ss + 1] ^ 2 * mean(simupmax^2 * (apply(simun[,1:ss], 1, sum) - simup[,ss +1] * sum(N[1:ss])) ^ 2)
+      varu2 <- c(varu2, N[ss + 1] * sum(N[1:ss]) * sum(N[1:(ss + 1)]))
+    }
+    varsimu <- varsimu / (sum(N)) ^ 2 / 4
+  
+    varu2 <-
+    varu2 * thetam ^ 2 * (thetam + 1 / sum(N)) / 12 / (sum(N)) ^ 2
+    varu <- varsimu + varu2
+    ## modified Kruskal Wallis test statistic
+    w <- sum(u ^ 2 / varu)
+    return(w)
+  }
+  
+  ## calclulate the zikw statistic
+  w <- calculate_zikw_statistic(x)
+  
+  ## calculate the pvalue
+  if (perm) {
+    numrep <- 10000
+    permu.w <- rep(0, numrep)
+    for (i in 1:numrep) {
+      x.perm <- sample(xvec, sum(N))
+      permu.w[i] <- calculate_zikw_statistic(x.perm)
+    }
+    pw <- sum(abs(w) < abs(permu.w)) / numrep
+  }
+  else{
+    pw <- pchisq(w, K - 1, lower.tail = F)
+  }
+  
+  return(list(p.value = pw, statistics = w))
 }

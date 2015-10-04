@@ -3,6 +3,7 @@
 #' @param x a vector of data for one group
 #' @param y a vector of data for another group
 #' @param perm use permutation to calculate the pvalue
+#' @param perm.n number of permutations used for pvalue calculation
 #' @return modified wilcoxon rank sum statistic and pvalue
 #' @export
 #' @examples
@@ -13,7 +14,7 @@
 #' ziw(x, y, perm = TRUE)
 
 
-ziw = function(x, y, perm = FALSE) {
+ziw = function(x, y, perm = FALSE, perm.n = 10000) {
   calculate_ziw_statistic = function(x,y){
     ## total observations in each vector
     N <- c(length(x), length(y))

@@ -2,10 +2,10 @@ Package: ZIR
 Type: Package
 Title: Modified Wilcoxon Rank Test and Kruskal Wallis Test for Zero-Inflated Data
 Version: 1.0.0
-Date: 2015-10-06
+Date: 2015-10-05
 Authors@R: c( 
     person("Wanjie", "Wang", email = "wanjie.w@gmail.com", role = c("aut", "cre")), 
-    person("Eric", "Zhang Chen", email = "chvlyl@gmail.com",role = c("aut")) 
+    person("Eric", "Z. Chen", email = "chvlyl@gmail.com",role = c("aut")) 
     )
 Description: When the underlying distribution of data is unknown,usually we use 
   nonparametric test to test the difference between groups. For example, 

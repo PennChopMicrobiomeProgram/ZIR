@@ -6,6 +6,7 @@
 #' @param perm.n number of permutations used for pvalue calculation
 #' @return modified Kruskal Wallis test statistic and pvalue
 #' @export
+#' @import stats utils graphics methods
 #' @examples
 #' ## x is a list
 #' x <- list(group1 = c(rep(0,5),rlnorm(20, meanlog = 0, sdlog = 1)),
@@ -20,6 +21,7 @@
 #' zikw(x, group, perm = FALSE)
 #' ## use permutations to calculate the pvalue
 #' \dontrun{zikw(x, group, perm = TRUE)}
+#' @references Wanjie Wang, Eric Z. Chen and Hongzhe Li (2015). Rank-based tests for compositional distributions with a clump of zeros. Submitted.
 
 zikw <- function(x, group, perm = FALSE, perm.n = 10000) {
   ## transform x into a list

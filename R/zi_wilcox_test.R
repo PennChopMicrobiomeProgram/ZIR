@@ -6,13 +6,14 @@
 #' @param perm.n number of permutations used for pvalue calculation
 #' @return modified wilcoxon rank sum statistic and pvalue
 #' @export
+#' @import stats utils graphics methods
 #' @examples
 #' x <- c(rep(0,5),rlnorm(20, meanlog = 0, sdlog = 1))
 #' y <- c(rep(0,10),rlnorm(20, meanlog = 2, sdlog = 1))
 #' ziw(x, y, perm = FALSE)
 #' ## use permutations to calculate the pvalue
 #' ziw(x, y, perm = TRUE)
-
+#' @references Wanjie Wang, Eric Z. Chen and Hongzhe Li (2015). Rank-based tests for compositional distributions with a clump of zeros. Submitted.
 
 ziw = function(x, y, perm = FALSE, perm.n = 10000) {
   calculate_ziw_statistic = function(x,y){

@@ -2,7 +2,7 @@ Package: ZIR
 Type: Package
 Title: Modified Wilcoxon Rank Test and Kruskal Wallis Test for Zero-Inflated Data
 Version: 1.0.0
-Date: 2015-05-06
+Date: 2015-10-06
 Authors@R: c( 
     person("Wanjie", "Wang", email = "wanjie.w@gmail.com", role = c("aut", "cre")), 
     person("Eric", "Zhang Chen", email = "chvlyl@gmail.com",role = c("aut")) 
@@ -17,6 +17,14 @@ Description: When the underlying distribution of data is unknown,usually we use
   (Zero-Inflated Rank Test), which has more power than the traditional rank 
   based test when the data contain many zeroes, and have similar power as the 
   traditional rank based test when the data don't have too many zeros.
+Imports:
+    graphics,
+    methods,
+    stats,
+    utils
+Suggests:
+    testthat,
+    roxygen2,
+    knitr
 License: GPL-2
 LazyData: true
-References: Wanjie Wang, Eric Z. Chen and Hongzhe Li (2015). Rank-based tests for compositional distributions with a clump of zeros. Submitted.

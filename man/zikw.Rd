@@ -36,4 +36,7 @@ zikw(x, group, perm = FALSE)
 ## use permutations to calculate the pvalue
 \dontrun{zikw(x, group, perm = TRUE)}
 }
+\references{
+Wanjie Wang, Eric Z. Chen and Hongzhe Li (2015). Rank-based tests for compositional distributions with a clump of zeros. Submitted.
+}
 

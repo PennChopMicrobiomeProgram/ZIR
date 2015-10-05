@@ -2,3 +2,7 @@
 
 export(zikw)
 export(ziw)
+import(graphics)
+import(methods)
+import(stats)
+import(utils)

@@ -18,6 +18,7 @@ Description: When the underlying distribution of data is unknown,usually we use
   based test when the data contain many zeroes, and have similar power as the 
   traditional rank based test when the data don't have too many zeros.
 Imports:
+    Rcpp,
     graphics,
     methods,
     stats,
@@ -26,5 +27,7 @@ Suggests:
     testthat,
     roxygen2,
     knitr
+LinkingTo:
+    Rcpp
 License: GPL-2
 LazyData: true

@@ -1,3 +1,7 @@
+#' @useDynLib thepacakgename
+#' @importFrom Rcpp sourceCpp
+NULL
+
 #' Modified Wilcoxon rank test (ZIW) for zero-inflated data
 #'
 #' @param x a vector of data for one group

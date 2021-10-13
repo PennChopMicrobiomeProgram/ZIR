@@ -38,4 +38,4 @@ zikw(x, perm = TRUE)
 ```
 
 ## Citation
-Wanjie Wang, Eric Z. Chen and Hongzhe Li (2015). Rank-based tests for compositional distributions with a clump of zeros. [Submitted](https://arxiv.org/abs/2110.05368).
+Wanjie Wang, Eric Z. Chen and Hongzhe Li (2021). Truncated Rank-Based Tests for Two-Part Models with Excessive Zeros and Applications to Microbiome Data. [Submitted](https://arxiv.org/abs/2110.05368).

@@ -21,5 +21,6 @@ test_that("zikw works for example data", {
   expect_equal(
     zikw(x, g),
     list(p.value = 0.0002513405, statistics = 16.57740367),
-    tolerance = 1e-5)
+    tolerance = 1e-5
+  )
 })
